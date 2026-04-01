@@ -217,11 +217,11 @@ class _EmptyResultsView extends StatelessWidget {
   }
 }
 
-class _ErrorView extends StatelessWidget {
+class _ErrorView extends ConsumerWidget {
   const _ErrorView();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -234,6 +234,20 @@ class _ErrorView extends StatelessWidget {
           const SizedBox(height: 4),
           Text('Verifica tu internet e intenta de nuevo.',
               style: InkTextStyles.bodySmall),
+          const SizedBox(height: 20),
+          ElevatedButton.icon(
+            onPressed: () => ref.invalidate(searchResultsProvider),
+            icon: const Icon(Icons.refresh_rounded),
+            label: const Text('Reintentar'),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: InkColors.primary,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24,
+                vertical: 12,
+              ),
+            ),
+          ),
         ],
       ),
     );
